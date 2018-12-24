@@ -63,8 +63,13 @@ public with sharing class Factory {
 
     public static void setup() {
 
-        Id gatesFoundationId = createAccount('Gates Foundation');
+        /* Accounts
+        */
+        Id gatesFoundationId = createAccount('Gates Foundation'),
+        malariaResearchLabId = createAccount('Malaria Research Lab');
         
+        /* Opportunity (in bound funds)
+        */
         Id gatesGrantId = createOpportunity(
             gatesFoundationId, 
             'Gates Fundation Grant 2019',
@@ -73,11 +78,18 @@ public with sharing class Factory {
             'Closed Won'
         );
 
+        /* Contacts
+        */
         Id billGatesId = createContact(
             gatesFoundationId,
             'Bill', 'Gates'
         );
+        Id MalariaResearcherId = createContact(
+            malariaResearchLabId, 'Dr', 'Researcher'
+        );
 
+        /* Funcding Program
+        */
         Id fundingProgramId = createFundingProgram(
             'Malaria', 'Malaria Funding Program'
         );
