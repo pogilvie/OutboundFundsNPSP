@@ -21,6 +21,7 @@ query :
 	sfdx force:data:soql:query -q 'select Id, Name from Contact' -u $(user)
 	sfdx force:data:soql:query -q 'select Id, Name from outfunds__Funding_Program__c' -u $(user)
 	sfdx force:data:soql:query -q 'select Id, Name from outfunds__Funding_Request__c' -u $(user)
+	sfdx force:data:soql:query -q 'select Id, Name from outfunds__Disbursement__c' -u $(user)
 
 account : 
 	sfdx force:schema:sobject:describe -s account -u $(user) |grep name:

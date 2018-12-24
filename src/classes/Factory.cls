@@ -84,6 +84,21 @@ public with sharing class Factory {
         return fr.Id;
     }
 
+    public static Id createDisbursment(Id request) {
+
+        outfunds__Disbursement__c d = new outfunds__Disbursement__c(
+            outfunds__Funding_Request__c = request,
+            outfunds__Amount__c = 100,
+            outfunds__Disbursement_Date__c = Date.today(),
+            outfunds__Disbursement_Method__c = 'Check',
+            outfunds__Type__c = 'Initial'
+
+        );
+        insert d;
+
+        return d.Id;
+    }
+
     public static void setup() {
 
         /* Accounts
@@ -125,14 +140,20 @@ public with sharing class Factory {
             malariaResearchLabId,
             fundingProgramId
         );
+
+        /* Disbursment
+        */
+        Id disbusrsement = createDisbursment(fundingRquestId);
+
        
     }
 
     public static void cleanup() {
         delete [select Id from Opportunity];
-        delete [select Id from Contact];
-        delete [select Id from Account];
         delete [select Id from outfunds__Funding_Program__c];
         delete [select Id from outfunds__Funding_Request__c];
+        delete [select Id from Account];
+        delete [select Id from Contact];
+        delete [select Id from outfunds__Disbursement__c];
     }
 }
