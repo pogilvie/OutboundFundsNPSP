@@ -1,3 +1,10 @@
-<aura:component>
-
+<aura:component implements="flexipage:availableForRecordHome">
+    <lightning:card footer="Card Footer" title="Hello">
+        <aura:set attribute="actions">
+            <lightning:button label="New"/>
+        </aura:set>
+        <p class="slds-p-horizontal_small">
+            Card Body (custom component)
+        </p>
+    </lightning:card>
 </aura:component>	
