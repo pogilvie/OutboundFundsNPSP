@@ -61,6 +61,29 @@ public with sharing class Factory {
 
     }
 
+    public static Id createFundingRequest(String Name, Id who, Id fromOrg, Id program) {
+
+        outfunds__Funding_Request__c fr = new outfunds__Funding_Request__c(
+            Name = name,
+            outfunds__Applying_Contact__c = who,
+            outfunds__Applying_Organization__c = fromOrg,
+            outfunds__Funding_Program__c = program,
+            outfunds__Requested_Amount__c = 10000,
+            outfunds__Recommended_Amount__c = 9000,
+            outfunds__Requested_For__c = 'Malaria Research',
+            outfunds__Status__c = 'Awarded',
+            outfunds__Population_Served__c = 'outfunds__Population_Served__c',
+            outfunds__Application_Date__c = Date.today().addMonths(-1),
+            outfunds__Close_Date__c = Date.today(),
+            outfunds__Term_Start_Date__c = Date.today(),
+            outfunds__Term_End_Date__c = Date.today().addYears(1),
+            outfunds__Awarded_Date__c = Date.today().addDays(-7)
+        );
+        insert fr;
+
+        return fr.Id;
+    }
+
     public static void setup() {
 
         /* Accounts
@@ -88,10 +111,19 @@ public with sharing class Factory {
             malariaResearchLabId, 'Dr', 'Researcher'
         );
 
-        /* Funcding Program
+        /* Funding Program
         */
         Id fundingProgramId = createFundingProgram(
             'Malaria', 'Malaria Funding Program'
+        );
+
+        /* Funding Request
+        */
+        Id fundingRquestId = createFundingRequest(
+            'New Malaria Research',
+            MalariaResearcherId,
+            malariaResearchLabId,
+            fundingProgramId
         );
        
     }
@@ -101,5 +133,6 @@ public with sharing class Factory {
         delete [select Id from Contact];
         delete [select Id from Account];
         delete [select Id from outfunds__Funding_Program__c];
+        delete [select Id from outfunds__Funding_Request__c];
     }
 }
