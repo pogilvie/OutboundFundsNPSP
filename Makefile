@@ -23,6 +23,9 @@ query :
 	sfdx force:data:soql:query -q 'select Id, Name from outfunds__Funding_Request__c' -u $(user)
 	sfdx force:data:soql:query -q 'select Id, Name from outfunds__Disbursement__c' -u $(user)
 
+test :
+	sfdx force:apex:test:run -n Requirements -r human --wait 10 -u $(user)
+
 account : 
 	sfdx force:schema:sobject:describe -s account -u $(user) |grep name:
 
@@ -34,6 +37,9 @@ component :
 
 factory :
 	sfdx force:source:deploy -p ./src/classes/Factory.cls -u $(user)
+
+requirements :
+	sfdx force:source:deploy -p ./src/classes/Requirements.cls -u $(user)
 
 
 

@@ -99,6 +99,18 @@ public with sharing class Factory {
         return d.Id;
     }
 
+    public static Id createGAU(String name, String description) {
+
+        npsp__General_Accounting_Unit__c gau = new npsp__General_Accounting_Unit__c(
+            Name = name,
+            npsp__Description__c = description
+
+        );
+        insert gau;
+
+        return gau.Id;
+    }
+
     public static void setup() {
 
         /* Accounts

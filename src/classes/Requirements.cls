@@ -7,6 +7,11 @@
         
     }
 
+    @IsTest static void coverFactory() {
+        Factory.setup();
+        Factory.cleanup();
+    }
+
     @IsTest static void one() {
 
         Account gatesFoundation = [select Id from Account];
