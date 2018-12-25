@@ -103,12 +103,24 @@ public with sharing class Factory {
 
         npsp__General_Accounting_Unit__c gau = new npsp__General_Accounting_Unit__c(
             Name = name,
-            npsp__Description__c = description
-
+            npsp__Description__c = description,
+            npsp__Active__c = true
         );
         insert gau;
 
         return gau.Id;
+    }
+
+    public static Id createGAUAllocation(Id oppt, Id gau, Decimal amt) {
+
+        npsp__Allocation__c allocation = new npsp__Allocation__c (
+            npsp__Opportunity__c = oppt,
+            npsp__General_Accounting_Unit__c = gau,
+            npsp__Amount__c = amt
+        );
+        insert allocation;
+
+        return allocation.Id;
     }
 
     public static void setup() {
@@ -157,6 +169,14 @@ public with sharing class Factory {
         */
         Id disbusrsement = createDisbursment(fundingRquestId);
 
+        /* GAU
+        */
+        Id gau = createGAU('Malaria GAU', 'Fund targeted specifically for Malaria research');
+
+        /* GAU Allocation
+        */
+        Id allo = createGAUAllocation(gatesGrantId, gau, 1000.5);
+
        
     }
 
@@ -167,5 +187,6 @@ public with sharing class Factory {
         delete [select Id from Account];
         delete [select Id from Contact];
         delete [select Id from outfunds__Disbursement__c];
+        delete [select Id from npsp__General_Accounting_Unit__c];
     }
 }

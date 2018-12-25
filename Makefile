@@ -22,15 +22,29 @@ query :
 	sfdx force:data:soql:query -q 'select Id, Name from outfunds__Funding_Program__c' -u $(user)
 	sfdx force:data:soql:query -q 'select Id, Name from outfunds__Funding_Request__c' -u $(user)
 	sfdx force:data:soql:query -q 'select Id, Name from outfunds__Disbursement__c' -u $(user)
+	sfdx force:data:soql:query -q 'select Id, Name, npsp__Description__c from npsp__General_Accounting_Unit__c' -u $(user)
+	sfdx force:data:soql:query -q 'select Id, Name, npsp__Amount__c from npsp__Allocation__c' -u $(user)
+
+query_gau :
+	sfdx force:data:soql:query -q 'select Id, Name, npsp__Total_Allocations__c, npsp__Total_Number_of_Allocations__c  from npsp__General_Accounting_Unit__c' -u $(user)
 
 test :
 	sfdx force:apex:test:run -n Requirements -r human --wait 10 -u $(user)
 
-account : 
+desc_account : 
 	sfdx force:schema:sobject:describe -s account -u $(user) |grep name:
 
-opportunity : 
+desc_opportunity : 
 	sfdx force:schema:sobject:describe -s opportunity -u $(user) |grep name:
+
+GAU_Expendature :
+	sfdx force:source:deploy -p ./src/objects/GAU_Expendature__c.object -u $(user)
+
+deploy :
+	sfdx force:mdapi:deploy -d ./deploysrc --wait 10 -u $(user)
+
+gau :
+	sfdx force:source:deploy -p ./src/objects/npsp__General_Accounting_Unit__c.object -u $(user)
 
 component :
 	sfdx force:source:deploy -p ./src/aura/outfundsnpsp_manangeDispersements
