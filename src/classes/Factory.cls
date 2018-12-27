@@ -99,6 +99,18 @@ public with sharing class Factory {
         return d.Id;
     }
 
+    public static Id createExpenditure(Id disbusmentId, Id gauId, Decimal amt) {
+
+        GAU_Expendature__c ex = new GAU_Expendature__c(
+            Disbursement__c = disbusmentId,
+            General_Accounting_Unit__c = gauId,
+            Amount__c = amt
+        );
+        insert ex;
+
+        return ex.Id;
+    }
+
     public static Id createGAU(String name, String description) {
 
         npsp__General_Accounting_Unit__c gau = new npsp__General_Accounting_Unit__c(
@@ -167,17 +179,20 @@ public with sharing class Factory {
 
         /* Disbursment
         */
-        Id disbusrsement = createDisbursment(fundingRquestId);
+        Id disbusrsementId = createDisbursment(fundingRquestId);
 
         /* GAU
         */
-        Id gau = createGAU('Malaria GAU', 'Fund targeted specifically for Malaria research');
+        Id gauId = createGAU('Malaria GAU', 'Fund targeted specifically for Malaria research');
+
+        /* Expenditure
+        */
+        Id expenditureId = createExpenditure(disbusrsementId, gauId, 100);
 
         /* GAU Allocation
         */
-        Id allo = createGAUAllocation(gatesGrantId, gau, 1000.5);
+        Id allo = createGAUAllocation(gatesGrantId, gauId, 1000.5);
 
-       
     }
 
     public static void cleanup() {

@@ -25,8 +25,13 @@ query :
 	sfdx force:data:soql:query -q 'select Id, Name, npsp__Description__c from npsp__General_Accounting_Unit__c' -u $(user)
 	sfdx force:data:soql:query -q 'select Id, Name, npsp__Amount__c from npsp__Allocation__c' -u $(user)
 
+allo_query = 'select Id, npsp__Amount__c, npsp__General_Accounting_Unit__r.Name, npsp__Opportunity__r.Name\
+              from npsp__Allocation__c'
+gau_query  = 'select Id, Name, npsp__Total_Allocations__c, npsp__Total_Number_of_Allocations__c\
+              from npsp__General_Accounting_Unit__c'
 query_gau :
-	sfdx force:data:soql:query -q 'select Id, Name, npsp__Total_Allocations__c, npsp__Total_Number_of_Allocations__c  from npsp__General_Accounting_Unit__c' -u $(user)
+	sfdx force:data:soql:query -q $(allo_query) -u $(user)
+	sfdx force:data:soql:query -q $(gau_query) -u $(user)
 
 test :
 	sfdx force:apex:test:run -n Requirements -r human --wait 10 -u $(user)
