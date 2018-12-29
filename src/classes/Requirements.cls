@@ -32,7 +32,7 @@
          npsp__General_Accounting_Unit__c gau = [
             select 
                 Id, 
-                Amount_Available__c, 
+                outfundsnpspext__Amount_Available__c, 
                 npsp__Total_Number_of_Allocations__c
             from npsp__General_Accounting_Unit__c
         ];
@@ -48,7 +48,7 @@
         System.assertEquals(gau.Id, allo.npsp__General_Accounting_Unit__c);
         System.assertEquals(o.Id, allo.npsp__Opportunity__c);
         System.assert(o.Amount > 0, 'Opportunity amount should be greater than 0');
-        System.assert(gau.Amount_Available__c > 0, 'GAU amount should be greater than 0');
+        System.assert(gau.outfundsnpspext__Amount_Available__c > 0, 'GAU amount should be greater than 0');
         System.assert(gau.npsp__Total_Number_of_Allocations__c > 0, 'Number of GAU allocations should be more then 0');
 
      }
