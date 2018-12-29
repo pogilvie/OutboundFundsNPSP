@@ -25,9 +25,10 @@ query :
 	sfdx force:data:soql:query -q 'select Id, Name, npsp__Description__c from npsp__General_Accounting_Unit__c' -u $(user)
 	sfdx force:data:soql:query -q 'select Id, Name, npsp__Amount__c from npsp__Allocation__c' -u $(user)
 
-allo_query = 'select Id, npsp__Amount__c, npsp__General_Accounting_Unit__r.Name, npsp__Opportunity__r.Name\
+allo_query = 'select Id, npsp__Amount__c, npsp__General_Accounting_Unit__c, npsp__General_Accounting_Unit__r.Name, npsp__Opportunity__r.Name\
               from npsp__Allocation__c'
-gau_query  = 'select Id, Name, npsp__Total_Allocations__c, npsp__Total_Number_of_Allocations__c\
+gau_query  = 'select Id, Name, npsp__Total_Allocations__c, npsp__Total_Number_of_Allocations__c,\
+              npsp__First_Allocation_Date__c, npsp__Largest_Allocation__c, npsp__Last_Allocation_Date__c, npsp__Smallest_Allocation__c\
               from npsp__General_Accounting_Unit__c'
 query_gau :
 	sfdx force:data:soql:query -q $(allo_query) -u $(user)
@@ -52,7 +53,7 @@ gau :
 	sfdx force:source:deploy -p ./src/objects/npsp__General_Accounting_Unit__c.object -u $(user)
 
 component :
-	sfdx force:source:deploy -p ./src/aura/outfundsnpsp_manangeDispersements
+	sfdx force:source:deploy -p ./src/aura/manageDisbursements -u $(user)
 
 factory :
 	sfdx force:source:deploy -p ./src/classes/Factory.cls -u $(user)

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+        <members>npsp__General_Accounting_Unit__c.pdo_Amount_Available__c</members>
+        <name>CustomField</name>
+    <version>44.0</version>
+</Package>

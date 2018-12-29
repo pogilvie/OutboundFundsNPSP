@@ -101,10 +101,10 @@ public with sharing class Factory {
 
     public static Id createExpenditure(Id disbusmentId, Id gauId, Decimal amt) {
 
-        GAU_Expendature__c ex = new GAU_Expendature__c(
-            Disbursement__c = disbusmentId,
-            General_Accounting_Unit__c = gauId,
-            Amount__c = amt
+        outfundsnpspext__GAU_Expenditure__c ex = new outfundsnpspext__GAU_Expenditure__c(
+            outfundsnpspext__Disbursement__c = disbusmentId,
+            outfundsnpspext__General_Accounting_Unit__c = gauId,
+            outfundsnpspext__Amount__c = amt
         );
         insert ex;
 
