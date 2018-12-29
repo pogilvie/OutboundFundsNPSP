@@ -196,6 +196,10 @@ public with sharing class Factory {
     }
 
     public static void cleanup() {
+
+        if ([select count() from case] > 0)
+            delete [select Id from case];
+
         delete [select Id from Opportunity];
         delete [select Id from outfunds__Funding_Program__c];
         delete [select Id from outfunds__Funding_Request__c];
