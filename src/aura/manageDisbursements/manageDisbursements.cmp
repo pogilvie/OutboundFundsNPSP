@@ -1,3 +1,22 @@
-<aura:component>
+<aura:component implements="flexipage:availableForRecordHome" 
+                    access="global"                
+>   
+    <aura:attribute name="total" type="Decimal" default="0.0" />
+    <aura:attribute name="selectedItem" type="String" />
+
+    <lightning:card footer="{!v.total}" title="Manage Expenditures">
+        <p class="slds-p-horizontal_small">
+                <c:Lookup 
+                    objectName="Opportunity"
+                    field_API_text="Name"
+                    field_API_val="Id"
+                    limit="4"
+                    field_API_search="Name"
+                    lookupIcon="standard:opportunity" 
+                    selItem="{!v.selectedItem}" 
+                    placeholder="Enter space after text to search Opportunities"
+                />  
+        </p>
+    </lightning:card>
 
 </aura:component>	

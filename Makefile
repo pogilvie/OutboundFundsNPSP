@@ -61,6 +61,12 @@ factory :
 requirements :
 	sfdx force:source:deploy -p ./src/classes/Requirements.cls -u $(user)
 
+lookupController :
+	sfdx force:source:deploy -p ./src/classes/Lookup.cls -u $(user)
+
+lookupComponent : 
+	sfdx force:source:deploy -p ./src/aura/Lookup -u $(user)
+
 
 
 
