@@ -67,6 +67,9 @@ lookupController :
 lookupComponent : 
 	sfdx force:source:deploy -p ./src/aura/Lookup -u $(user)
 
+rowComponent :
+	sfdx force:source:deploy -p ./src/aura/row -u $(user)
+
 
 
 
