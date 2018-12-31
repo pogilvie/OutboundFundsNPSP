@@ -1,5 +1,5 @@
 ({
-    myAction : function(component, event, helper) {
-
+    doDelete : function(cmp, event, helper) {
+        console.log('doDelete called');
     }
 })

@@ -63,8 +63,9 @@
                         <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right">
                             <div> 
                                 <aura:if isTrue="{! empty(v.selItem) }"> 
-                                         <input 
-                                            type="text" 
+                                        <input 
+                                            type="text"
+                                            style="min-height: 1.620rem; line-height: 1.60rem"
                                             class="slds-input slds-combobox__input" 
                                             id="combobox-unique-id" 
                                             aria-activedescendant="listbox-option-unique-id-01" 

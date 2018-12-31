@@ -5,18 +5,51 @@
     <aura:attribute name="selectedItem" type="String" />
 
     <lightning:card footer="{!v.total}" title="Manage Expenditures">
-        <p class="slds-p-horizontal_small">
+        <div class="slds-grid slds-gutters">
+            <div style="padding-top: 5px" class="slds-col slds-size_3-of-6">
+                <p class="slds-text-body_small">GAU</p>
                 <c:Lookup 
-                    objectName="Opportunity"
+                    objectName="npsp__General_Accounting_Unit__c"
                     field_API_text="Name"
                     field_API_val="Id"
                     limit="4"
                     field_API_search="Name"
-                    lookupIcon="standard:opportunity" 
+                    lookupIcon="custom:custom87" 
                     selItem="{!v.selectedItem}" 
-                    placeholder="Enter space after text to search Opportunities"
-                />  
-        </p>
+                    placeholder="Enter the start of the GAU name followed by a space"
+                />
+            </div>
+            <div class="slds-col slds-size_1-of-6">
+                <lightning:input 
+                    type="number" 
+                    name="amount" 
+                    label="Amount" 
+                    value="123.45" 
+                    formatter="currency"
+                    step="0.01"
+                />
+            </div>
+            <div class="slds-col slds-size_1-of-6">
+                <lightning:input
+                    type="number" 
+                    name="percent" 
+                    label="Percent" 
+                    value="0.5" 
+                    formatter="percent" 
+                    step="0.01"
+                />
+            </div>
+            <div style="padding-top: 23px" class="slds-col slds-size_1-of-6">
+                <lightning:button 
+                    variant="destructive" 
+                    label="Delete" 
+                    title="Delete Row"
+                    iconName="utility:close" 
+                    iconPosition="left" 
+                    onclick="{! c.doDelete }"
+                />
+            </div>
+        </div>
     </lightning:card>
 
 </aura:component>	
