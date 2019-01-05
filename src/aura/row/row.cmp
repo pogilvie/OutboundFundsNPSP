@@ -1,7 +1,18 @@
 <aura:component>
+
+    <!-- input/output -->
+    <aura:attribute name="dispTotal"     type="Decimal"/>
+    <aura:attribute name="amount"        type="Decimal"/>
+
+    <aura:attribute name="selectedItem"  type="Object"/>
+    <aura:attribute name="dispRemaining" type="Decimal"/>
+    <aura:attribute name="percent"       type="Decimal"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
     <div class="slds-grid slds-gutters">
-        <div style="padding-top: 5px" class="slds-col slds-size_3-of-6">
-            <p class="slds-text-body_small">GAU</p>
+        <div style="padding-top: 7px" class="slds-col slds-size_3-of-6">
+            <p class="slds-text-body_small">General Allocation Unit</p>
             <c:Lookup 
                 objectName="npsp__General_Accounting_Unit__c"
                 field_API_text="Name"
@@ -18,7 +29,7 @@
                 type="number" 
                 name="amount" 
                 label="Amount" 
-                value="123.45" 
+                value="{!v.amount}" 
                 formatter="currency"
                 step="0.01"
             />
@@ -28,9 +39,10 @@
                 type="number" 
                 name="percent" 
                 label="Percent" 
-                value="0.5" 
+                value="{!v.percent}" 
                 formatter="percent" 
                 step="0.01"
+                onblur="{!c.handlePercent}"
             />
         </div>
         <div style="padding-top: 23px" class="slds-col slds-size_1-of-6">
@@ -40,7 +52,7 @@
                 title="Delete Row"
                 iconName="utility:close" 
                 iconPosition="left" 
-                onclick="{! c.doDelete }"
+                onclick="{!c.doDelete}"
             />
         </div>
     </div>

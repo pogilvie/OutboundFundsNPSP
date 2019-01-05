@@ -24,6 +24,7 @@ query :
 	sfdx force:data:soql:query -q 'select Id, Name from outfunds__Disbursement__c' -u $(user)
 	sfdx force:data:soql:query -q 'select Id, Name, npsp__Description__c from npsp__General_Accounting_Unit__c' -u $(user)
 	sfdx force:data:soql:query -q 'select Id, Name, npsp__Amount__c from npsp__Allocation__c' -u $(user)
+	sfdx force:data:soql:query -q 'select Id, Name, outfundsnpspext__Disbursement__r.Name, outfundsnpspext__General_Accounting_Unit__r.Name, outfundsnpspext__Amount__c from outfundsnpspext__GAU_Expenditure__c' -u $(user)
 
 allo_query = 'select Id, npsp__Amount__c, npsp__General_Accounting_Unit__c, npsp__General_Accounting_Unit__r.Name, npsp__Opportunity__r.Name\
               from npsp__Allocation__c'
@@ -63,6 +64,9 @@ requirements :
 
 lookupController :
 	sfdx force:source:deploy -p ./src/classes/Lookup.cls -u $(user)
+
+manageDisbursementsController :
+	sfdx force:source:deploy -p ./src/classes/manageDisbursementsController.cls -u $(user)
 
 lookupComponent : 
 	sfdx force:source:deploy -p ./src/aura/Lookup -u $(user)
