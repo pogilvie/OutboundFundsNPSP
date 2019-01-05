@@ -7,7 +7,11 @@ public with sharing class manageDisbursementsController {
 
         try {
             return [
-                select Id, Name, outfundsnpspext__Amount__c 
+                select 
+                    Id,
+                    Name,
+                    outfundsnpspext__General_Accounting_Unit__c,
+                    outfundsnpspext__Amount__c
                 from outfundsnpspext__GAU_Expenditure__c 
                 where outfundsnpspext__Disbursement__c = :disburementId
             ];
@@ -21,6 +25,7 @@ public with sharing class manageDisbursementsController {
 
         return (
             Schema.sObjectType.outfunds__Disbursement__c.isAccessible() &&
+            Schema.sObjectType.outfundsnpspext__GAU_Expenditure__c.fields.outfundsnpspext__General_Accounting_Unit__c.isAccessible() &&
             Schema.sObjectType.outfundsnpspext__GAU_Expenditure__c.fields.outfundsnpspext__Disbursement__c.isAccessible() &&
             Schema.sObjectType.outfundsnpspext__GAU_Expenditure__c.fields.outfundsnpspext__Amount__c.isAccessible() &&
             Schema.sObjectType.outfundsnpspext__GAU_Expenditure__c.fields.Name.isAccessible() &&

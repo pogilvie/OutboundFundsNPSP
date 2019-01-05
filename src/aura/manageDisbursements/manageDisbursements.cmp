@@ -20,15 +20,34 @@
     />
 
     <lightning:card footer="{!'Amount of disbursement remaining to be allocated: ' + v.total}" title="Manage Expenditures">
-        <div>Disbursement Name: {!v.disbursement.Name}</div>
-        <div>Disbursement Amount: {!v.disbursement.outfunds__Amount__c}</div>
-        <div>Disburement RecordId: {!v.recordId}</div>
+
+        <div style="float: right;">
+            <lightning:button 
+                variant="brand"
+                label="Save" title="Save"
+                onclick="{!c.save}"
+            />
+            <lightning:button 
+                label="Cancel" title="Cancel"
+                onclick="{!c.cancel}"
+            />
+        </div>
 
         <aura:iteration items="{!v.expenditures}" var="e">
-            Expenditure: Name={!e.Name} Id={!e.Id} Amount={!e.outfundsnpspext__Amount__c}
-            <c:row dispTotal="{!v.disbursement.outfunds__Amount__c}" amount="{!e.outfundsnpspext__Amount__c}"></c:row>
+            <c:row 
+                dispTotal="{!v.disbursement.outfunds__Amount__c}"
+                amount="{!e.outfundsnpspext__Amount__c}">
+            </c:row>
         </aura:iteration>
 
+        <div style="float: right;" class="slds-m-top_large">
+            <lightning:button
+                label="Expenditure"
+                variant="brand"
+                iconName="utility:add"
+                onclick="{!c.newExpenditure}"
+            />
+        </div>
     </lightning:card>
 
 </aura:component>	
