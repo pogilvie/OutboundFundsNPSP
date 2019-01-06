@@ -29,5 +29,10 @@
         cmp.set('v.amount', dispTotal * fraction);
 
         console.log('handlePercent');
+    },
+    handleLookup : function(cmp, event, helper) {
+        console.log('selectedIem has changed');
+        console.log('old value: ' + JSON.stringify(event.getParam('oldValue')));
+        console.log('current value: ' + JSON.stringify(event.getParam('value')));
     }
 })

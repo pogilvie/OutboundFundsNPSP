@@ -4,10 +4,17 @@
     access="global"                
 >
     <!-- Attributes -->
-    <aura:attribute name="total" type="Decimal" default="0.1"/>
+    <aura:attribute name="allocated" type="Decimal" default="0"/>
+    <aura:attribute name="remaining" type="Decimal" default="0"/>
+    <aura:attribute name="expenditures2" type="Object"/>
     <aura:attribute name="expenditures" type="outfundsnpspext__GAU_Expenditure__c[]"/>
     <aura:attribute name="disbursement" type="Object"/>
     <aura:attribute name="recordError" type="String"/>
+    <aura:attribute name="saveDisabled" type="Boolean" default="true"/>
+
+    <!-- Events -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!v.expenditures2}" action="{!c.exChange}"/>
 
     <!-- Lightning Data Service -->
     <force:recordData aura:id="disbursementLoader"
@@ -19,9 +26,14 @@
         recordUpdated="{!c.disbursementUpdated}"
     />
 
-    <lightning:card footer="{!'Amount of disbursement remaining to be allocated: ' + v.total}" title="Manage Expenditures">
+    <lightning:card title="{!'Allocated: ' + v.allocated + ' Remaining: ' + v.remaining}">
 
         <div style="float: right;">
+            <lightning:button
+                label="Add"
+                iconName="utility:add"
+                onclick="{!c.newExpenditure}"
+            />
             <lightning:button 
                 label="Cancel" title="Cancel"
                 onclick="{!c.cancel}"
@@ -29,24 +41,21 @@
             <lightning:button 
                 variant="brand"
                 label="Save" title="Save"
+                disabled="{!v.saveDisabled}"
                 onclick="{!c.save}"
             />
         </div>
 
-        <aura:iteration items="{!v.expenditures}" var="e">
+        <aura:iteration items="{!v.expenditures}" var="e" indexVar="i">
             <c:row 
                 dispTotal="{!v.disbursement.outfunds__Amount__c}"
-                amount="{!e.outfundsnpspext__Amount__c}">
-            </c:row>
+                remaining="{!v.remaining}"
+                amount="{!e.outfundsnpspext__Amount__c}"
+                index="{!i}"
+                expenditures="{!v.enpenditures}"
+            />
         </aura:iteration>
 
-        <div style="float: right;" class="slds-m-top_large">
-            <lightning:button
-                label="Expenditure"
-                iconName="utility:add"
-                onclick="{!c.newExpenditure}"
-            />
-        </div>
     </lightning:card>
 
 </aura:component>	

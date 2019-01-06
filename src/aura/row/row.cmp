@@ -2,13 +2,27 @@
 
     <!-- input/output -->
     <aura:attribute name="dispTotal"     type="Decimal"/>
+    <aura:attribute name="remaining"     type="Decimal"/>
     <aura:attribute name="amount"        type="Decimal"/>
+    <aura:attribute name="expenditures"  type="outfundsnpspext__GAU_Expenditure__c[]"/>
+    <aura:attribute name="index"         type="Integer"/>
+    
+    <!-- local -->
+    <aura:attribute name="gau"     type="Object"/>
+    <aura:attribute name="percent" type="Decimal"/>
+    <aura:attribute name="current" type="outfundsnpspext__GAU_Expenditure__c"/>
 
-    <aura:attribute name="selectedItem"  type="Object"/>
-    <aura:attribute name="dispRemaining" type="Decimal"/>
-    <aura:attribute name="percent"       type="Decimal"/>
-
+    <!-- Events -->
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!v.selectedItem}" action="{!c.handleLookup}"/>
+
+    <div class="slds-m-top_large">
+        selected Item: {!v.gau.val}
+        current: 
+        GAU: {!v.current.outfundsnpspext__General_Accounting_Unit__c}
+        Name: {!v.current.Name}
+        Amount: {!v.current.outfundsnpspext__Amount__c}
+    </div>
 
     <div class="slds-grid slds-gutters">
         <div style="padding-top: 7px" class="slds-col slds-size_3-of-6">
@@ -20,7 +34,7 @@
                 limit="4"
                 field_API_search="Name"
                 lookupIcon="custom:custom87" 
-                selItem="{!v.selectedItem}" 
+                selItem="{!v.gau}" 
                 placeholder="Enter the start of the GAU name followed by a space"
             />
         </div>
