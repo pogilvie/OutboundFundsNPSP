@@ -23,13 +23,13 @@
 
         <div style="float: right;">
             <lightning:button 
+                label="Cancel" title="Cancel"
+                onclick="{!c.cancel}"
+            />
+            <lightning:button 
                 variant="brand"
                 label="Save" title="Save"
                 onclick="{!c.save}"
-            />
-            <lightning:button 
-                label="Cancel" title="Cancel"
-                onclick="{!c.cancel}"
             />
         </div>
 
@@ -43,7 +43,6 @@
         <div style="float: right;" class="slds-m-top_large">
             <lightning:button
                 label="Expenditure"
-                variant="brand"
                 iconName="utility:add"
                 onclick="{!c.newExpenditure}"
             />

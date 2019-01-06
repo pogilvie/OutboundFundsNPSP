@@ -11,6 +11,16 @@
         else
             cmp.set('v.percent', 0);
     },
+    handleAmount : function(cmp, event, helper) {
+        const
+            amount = cmp.get('v.amount'),
+            dispTotal = cmp.get('v.dispTotal');
+        
+        cmp.set('v.percent', amount/dispTotal);
+
+        console.log('handleAmount called');
+            
+    },
     handlePercent : function(cmp, event, helper) {
         const
             fraction = cmp.get('v.percent'),
@@ -18,5 +28,6 @@
 
         cmp.set('v.amount', dispTotal * fraction);
 
+        console.log('handlePercent');
     }
 })

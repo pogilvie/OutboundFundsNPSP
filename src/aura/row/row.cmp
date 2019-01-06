@@ -32,6 +32,7 @@
                 value="{!v.amount}" 
                 formatter="currency"
                 step="0.01"
+                onblur="{!c.handleAmount}"
             />
         </div>
         <div class="slds-col slds-size_1-of-6">
@@ -41,7 +42,7 @@
                 label="Percent" 
                 value="{!v.percent}" 
                 formatter="percent" 
-                step="0.01"
+                step="0.001"
                 onblur="{!c.handlePercent}"
             />
         </div>
