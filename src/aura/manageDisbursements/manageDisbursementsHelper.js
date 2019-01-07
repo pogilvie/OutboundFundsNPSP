@@ -21,6 +21,7 @@
                              Id : e.Id,
                            Name : e.Name,
                           gauId : e.outfundsnpspext__General_Accounting_Unit__c,
+                        gauName : e.outfundsnpspext__General_Accounting_Unit__r.Name,
                          amount : e.outfundsnpspext__Amount__c,
                         changed : false,
                           valid : true

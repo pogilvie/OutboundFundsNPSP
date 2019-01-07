@@ -4,6 +4,12 @@
             amount = cmp.get('v.lineItem.amount'),
             dispTotal = cmp.get('v.dispTotal');
 
+        cmp.set('v.gau', {
+            val: cmp.get('v.lineItem.gauId'),
+            text: cmp.get('v.lineItem.gauName'),
+        objName: 'npsp__General_Accounting_Unit__c'
+        });
+
         console.log('row doInit: ', amount, dispTotal)
 
         if (dispTotal > 0)
@@ -16,6 +22,13 @@
             amount = cmp.get('v.lineItem.amount'),
             dispTotal = cmp.get('v.dispTotal');
 
+        if (amount <= 0) {
+            cmp.set('v.invalidAmount', true);
+            return;
+        }
+
+        cmp.set('v.invalidAmount', false);
+
         try {
             let ev = cmp.getEvent('update');
         
@@ -27,9 +40,9 @@
             }
 
             ev.setParams({
-                opcode: 'update',
+               opcode: 'update',
                 index: cmp.get('v.index'), 
-                amount:cmp.get('v.lineItem.amount')
+               amount: cmp.get('v.lineItem.amount')
             });
             ev.fire();
 
@@ -45,13 +58,32 @@
             fraction = cmp.get('v.percent'),
             dispTotal = cmp.get('v.dispTotal');
 
-        cmp.set('v.lineItem.amount', dispTotal * fraction);
+        if (fraction > 1 || fraction <= 0) {
+            cmp.set('v.invalidPercent', true);
+            return;
+        }
+
+        cmp.set('v.invalidPercent', false)
+
+        let
+            ev = cmp.getEvent('update'),
+            amount = dispTotal * fraction;
+
+        cmp.set('v.lineItem.amount', amount);
+
+        ev.setParams({
+            opcode: 'update',
+             index: cmp.get('v.index'), 
+            amount: amount
+         });
+         ev.fire();
+
         cmp.set('v.lineItem.changed', true);
 
-        console.log('handlePercent');
+        console.log('handlePercent Done');
     },
     handleLookup : function(cmp, event, helper) {
-        console.log('selectedIem has changed');
+        console.log('gau has changed');
         console.log('old value: ' + JSON.stringify(event.getParam('oldValue')));
         console.log('current value: ' + JSON.stringify(event.getParam('value')));
     },

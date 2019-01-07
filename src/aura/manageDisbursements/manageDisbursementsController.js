@@ -24,6 +24,7 @@
                Id : '',
              Name : '',
             gauId : '',
+          gauName : '',
            amount : 0,
           changed : false,
             valid : false
@@ -50,6 +51,8 @@
             opcode = event.getParam('opcode'),
             expenditures = cmp.get('v.expenditures2');
         let
+            change = false,
+            remaining = 0,
             totalAmount = 0;
 
         console.log('handleUpdate opcode: ' + opcode);
@@ -67,13 +70,18 @@
             if (opcode === 'update' && i === index) {
                 console.log('setting amount')
                 e.amount = amount;
+                change = true;
             }
         });
         console.log('handleUpdate ' + totalAmount);
         cmp.set('v.allocated', totalAmount);
-        cmp.set('v.remaining', cmp.get('v.disbursement.outfunds__Amount__c') - totalAmount);
+
+        remaining = cmp.get('v.disbursement.outfunds__Amount__c') - totalAmount;
+        cmp.set('v.remaining', remaining);
 
         cmp.set('v.expenditures2', expenditures);
 
+        if (change) 
+            remaining >= 0 ? cmp.set('v.saveDisabled', false) :  cmp.set('v.saveDisabled', true);
     }
 })

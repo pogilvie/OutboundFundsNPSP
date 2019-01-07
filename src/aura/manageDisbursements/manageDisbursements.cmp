@@ -28,7 +28,7 @@
     />
 
     <lightning:card 
-        title="{!'Allocated: ' + v.allocated + ' Remaining: ' + v.remaining}"
+        title="{!'Total: ' + v.disbursement.outfunds__Amount__c + ' Allocated: ' + v.allocated + ' Remaining: ' + v.remaining}"
         class="slds-p-bottom_large"
     >
         <div style="float: right;">

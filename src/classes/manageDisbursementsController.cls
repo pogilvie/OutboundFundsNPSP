@@ -11,6 +11,7 @@ public with sharing class manageDisbursementsController {
                     Id,
                     Name,
                     outfundsnpspext__General_Accounting_Unit__c,
+                    outfundsnpspext__General_Accounting_Unit__r.Name,
                     outfundsnpspext__Amount__c
                 from outfundsnpspext__GAU_Expenditure__c 
                 where outfundsnpspext__Disbursement__c = :disburementId

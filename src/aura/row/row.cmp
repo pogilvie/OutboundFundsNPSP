@@ -1,19 +1,21 @@
 <aura:component>
 
     <!-- input/output -->
-    <aura:attribute name="dispTotal"     type="Decimal"/>
-    <aura:attribute name="remaining"     type="Decimal"/>
-    <aura:attribute name="lineItem"      type="Object"/>
-    <aura:attribute name="expenditures"  type="Object"/>
-    <aura:attribute name="index"         type="Integer"/>
+    <aura:attribute name="dispTotal"      type="Decimal"/>
+    <aura:attribute name="remaining"      type="Decimal"/>
+    <aura:attribute name="lineItem"       type="Object"/>
+    <aura:attribute name="expenditures"   type="Object"/>
+    <aura:attribute name="index"          type="Integer"/>
     
     <!-- local -->
-    <aura:attribute name="gau"     type="Object"/>
-    <aura:attribute name="percent" type="Decimal"/>
+    <aura:attribute name="gau"            type="Object"/>
+    <aura:attribute name="percent"        type="Decimal"/>
+    <aura:attribute name="invalidAmount"  type="Boolean"/>
+    <aura:attribute name="invalidPercent" type="Boolean"/>
 
     <!-- Events -->
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
-    <aura:handler name="change" value="{!v.selectedItem}" action="{!c.handleLookup}"/>
+    <aura:handler name="change" value="{!v.gau}" action="{!c.handleLookup}"/>
     <aura:registerEvent name="update" type="c:update"/>
 
 
@@ -52,6 +54,11 @@
                 step="0.01"
                 onblur="{!c.handleAmount}"
             />
+            <aura:if isTrue="{!v.invalidAmount}">
+                <div class="slds-text-color_error">
+                    Amount must be greater than 0
+                </div>
+            </aura:if>
         </div>
         <div class="slds-col slds-size_1-of-6">
             <lightning:input
@@ -63,6 +70,11 @@
                 step="0.001"
                 onblur="{!c.handlePercent}"
             />
+            <aura:if isTrue="{!v.invalidPercent}">
+                <div class="slds-text-color_error">
+                    Specify percent as a positive decimal number greater then 0 and less than or equal to 1
+                </div>
+            </aura:if>
         </div>
         <div style="padding-top: 23px" class="slds-col slds-size_1-of-6">
             <lightning:button 
