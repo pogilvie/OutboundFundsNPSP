@@ -15,6 +15,7 @@
     <!-- Events -->
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
     <aura:handler name="change" value="{!v.expenditures2}" action="{!c.exChange}"/>
+    <aura:handler name="update" event="c:update" action="{!c.handleUpdate}"/>
 
     <!-- Lightning Data Service -->
     <force:recordData aura:id="disbursementLoader"
@@ -26,8 +27,10 @@
         recordUpdated="{!c.disbursementUpdated}"
     />
 
-    <lightning:card title="{!'Allocated: ' + v.allocated + ' Remaining: ' + v.remaining}">
-
+    <lightning:card 
+        title="{!'Allocated: ' + v.allocated + ' Remaining: ' + v.remaining}"
+        class="slds-p-bottom_large"
+    >
         <div style="float: right;">
             <lightning:button
                 label="Add"
@@ -46,13 +49,13 @@
             />
         </div>
 
-        <aura:iteration items="{!v.expenditures}" var="e" indexVar="i">
+        <aura:iteration items="{!v.expenditures2}" var="e" indexVar="i">
             <c:row 
                 dispTotal="{!v.disbursement.outfunds__Amount__c}"
                 remaining="{!v.remaining}"
-                amount="{!e.outfundsnpspext__Amount__c}"
+                lineItem="{!e}"
                 index="{!i}"
-                expenditures="{!v.enpenditures}"
+                expenditures="{!v.enpenditures2}"
             />
         </aura:iteration>
 

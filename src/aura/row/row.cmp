@@ -3,25 +3,29 @@
     <!-- input/output -->
     <aura:attribute name="dispTotal"     type="Decimal"/>
     <aura:attribute name="remaining"     type="Decimal"/>
-    <aura:attribute name="amount"        type="Decimal"/>
-    <aura:attribute name="expenditures"  type="outfundsnpspext__GAU_Expenditure__c[]"/>
+    <aura:attribute name="lineItem"      type="Object"/>
+    <aura:attribute name="expenditures"  type="Object"/>
     <aura:attribute name="index"         type="Integer"/>
     
     <!-- local -->
     <aura:attribute name="gau"     type="Object"/>
     <aura:attribute name="percent" type="Decimal"/>
-    <aura:attribute name="current" type="outfundsnpspext__GAU_Expenditure__c"/>
 
     <!-- Events -->
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
     <aura:handler name="change" value="{!v.selectedItem}" action="{!c.handleLookup}"/>
+    <aura:registerEvent name="update" type="c:update"/>
+
 
     <div class="slds-m-top_large">
-        selected Item: {!v.gau.val}
-        current: 
-        GAU: {!v.current.outfundsnpspext__General_Accounting_Unit__c}
-        Name: {!v.current.Name}
-        Amount: {!v.current.outfundsnpspext__Amount__c}
+        <p>DispTotal: {!v.dispTotal}</p>
+        <p>selected Item: {!v.gau.val}</p>
+        <p>current: 
+        GAU: {!v.lineItem.gauId}
+        Name: {!v.lineItem.Name}
+        Amount: {!v.lineItem.amount}
+        changed: {!v.lineItem.chagned}
+        valid: {!v.lineItem.valid}</p>
     </div>
 
     <div class="slds-grid slds-gutters">
@@ -43,7 +47,7 @@
                 type="number" 
                 name="amount" 
                 label="Amount" 
-                value="{!v.amount}" 
+                value="{!v.lineItem.amount}" 
                 formatter="currency"
                 step="0.01"
                 onblur="{!c.handleAmount}"

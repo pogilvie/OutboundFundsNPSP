@@ -16,18 +16,22 @@
     newExpenditure : function(cmp, event, helper) {
 
         const
-            expenditures = cmp.get('v.expenditures');  
+            expenditures = cmp.get('v.expenditures2');  
 
         console.log('newExpenditure called');
 
         expenditures.push({
-            Id: '',
-            Name: '',
-            outfundsnpspext__Amount__c: 0,
-            outfundsnpspext__General_Accounting_Unit__c: ''
+               Id : '',
+             Name : '',
+            gauId : '',
+           amount : 0,
+          changed : false,
+            valid : false
         });
 
-        cmp.set('v.expenditures', expenditures)
+        cmp.set('v.expenditures2', expenditures);
+
+        console.log('newExpenditure done');
     },
     save : function(cmp, event, helper) {
         console.log('save');
@@ -38,5 +42,38 @@
     exChange : function(cmp, event, helper) {
         console.log('exChange old value: ' + JSON.stringify(event.getParam('oldValue')));
         console.log('exChange current value: ' + JSON.stringify(event.getParam('value')));
+    },
+    handleUpdate : function(cmp, event, helper) {
+        const
+            index = event.getParam('index'),
+            amount = event.getParam('amount'),
+            opcode = event.getParam('opcode'),
+            expenditures = cmp.get('v.expenditures2');
+        let
+            totalAmount = 0;
+
+        console.log('handleUpdate opcode: ' + opcode);
+        console.log('handleUpdate index: ' +  index);
+        console.log('handleUpdate amount: ' + amount);
+
+        if (opcode === 'delete') {
+            expenditures.splice(index, 1);
+        }
+
+        expenditures.forEach(function(e, i) {
+            console.log('e.amount ' + e.amount)
+            totalAmount += Number(e.amount);
+
+            if (opcode === 'update' && i === index) {
+                console.log('setting amount')
+                e.amount = amount;
+            }
+        });
+        console.log('handleUpdate ' + totalAmount);
+        cmp.set('v.allocated', totalAmount);
+        cmp.set('v.remaining', cmp.get('v.disbursement.outfunds__Amount__c') - totalAmount);
+
+        cmp.set('v.expenditures2', expenditures);
+
     }
 })

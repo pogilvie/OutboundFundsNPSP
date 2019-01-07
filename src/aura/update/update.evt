@@ -1,0 +1,7 @@
+<aura:event type="COMPONENT" description="update expenditure">
+
+    <aura:attribute name="index"  type="Integer"/>
+    <aura:attribute name="opcode" type="String"/>
+    <aura:attribute name="amount" type="Decimal"/>
+
+</aura:event>

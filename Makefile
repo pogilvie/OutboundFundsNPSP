@@ -75,6 +75,9 @@ lookupComponent :
 rowComponent :
 	sfdx force:source:deploy -p ./src/aura/row -u $(user)
 
+updateEvent :
+	sfdx force:source:deploy -p ./src/aura/update -u $(user)
+
 
 
 
