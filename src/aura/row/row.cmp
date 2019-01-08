@@ -19,7 +19,7 @@
     <aura:registerEvent name="update" type="c:update"/>
 
 
-    <div class="slds-m-top_large">
+    <!-- <div class="slds-m-top_large">
         <p>DispTotal: {!v.dispTotal}</p>
         <p>selected Item: {!v.gau.val}</p>
         <p>current: 
@@ -28,7 +28,7 @@
         Amount: {!v.lineItem.amount}
         changed: {!v.lineItem.chagned}
         valid: {!v.lineItem.valid}</p>
-    </div>
+    </div> -->
 
     <div class="slds-grid slds-gutters">
         <div style="padding-top: 7px" class="slds-col slds-size_3-of-6">

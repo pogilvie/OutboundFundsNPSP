@@ -74,18 +74,30 @@
         ev.setParams({
             opcode: 'update',
              index: cmp.get('v.index'), 
-            amount: amount
-         });
-         ev.fire();
+            amount: amount,
+             gauid: cmp.get('v.gua.val')
+        });
+        ev.fire();
 
         cmp.set('v.lineItem.changed', true);
 
         console.log('handlePercent Done');
     },
     handleLookup : function(cmp, event, helper) {
-        console.log('gau has changed');
-        console.log('old value: ' + JSON.stringify(event.getParam('oldValue')));
-        console.log('current value: ' + JSON.stringify(event.getParam('value')));
+        const
+            ev = cmp.getEvent('update'),
+            index = cmp.get('v.index');
+
+        console.log(`index ${index} gau old value: ` + JSON.stringify(event.getParam('oldValue')));
+        console.log(`index ${index} gau current value: ` + JSON.stringify(event.getParam('value')));
+
+        // ev.setParams({
+        //     opcode: 'gau',
+        //     index: index,
+        //     gauid: event.getParam('value').val
+
+        // });
+        // ev.fire();
     },
     doDelete : function(cmp, event, helper) {
         console.log('doDelete called');

@@ -36,6 +36,12 @@
     },
     save : function(cmp, event, helper) {
         console.log('save');
+        try {
+            helper.saveExpenditures(cmp);
+        } catch (error) {
+            console.log('error: ', error)
+        }
+        console.log('after show toast')
     },
     cancel : function(cmp, event, helper) {
         console.log('cancel');
@@ -58,6 +64,12 @@
         console.log('handleUpdate opcode: ' + opcode);
         console.log('handleUpdate index: ' +  index);
         console.log('handleUpdate amount: ' + amount);
+
+        if (opcode === 'gau') {
+            expenditures[index].gauId = event.getParam('gauid')
+            cmp.set('v.expenditures2', expenditures);
+            return;
+        }
 
         if (opcode === 'delete') {
             expenditures.splice(index, 1);
