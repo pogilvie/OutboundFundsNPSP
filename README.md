@@ -52,8 +52,9 @@ access_token: 00D3D0000009zt3!AQ8AQKPifK.80G7JFD._zUTdNByDiT1f5ROCqCcavyppBxQ6gj
 password: None
 Org expires on Tue Jan 15 08:42:11 2019
 ````
-6. Run the dev_org flow
+6. Run the dev_org flow (takes about 30 - 45)
 ````
+cci flow run dev_org
 ````
 
 
