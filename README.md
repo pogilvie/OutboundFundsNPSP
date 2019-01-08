@@ -1,3 +1,12 @@
+### CCI Setup
+1. Activate cci (after activation promple on unix machines should be prepended with 'cci')
+````
+pogilvie::~/Projects-> source cci/bin/activate
+(cci) pogilvie::~/Projects->
+
+````
+
+
 ## Questions
 
 ### blocking
