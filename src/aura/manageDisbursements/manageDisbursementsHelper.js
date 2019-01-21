@@ -32,7 +32,7 @@
                 cmp.set('v.remaining', 
                     cmp.get('v.disbursement.outfunds__Amount__c') - totalAllocated);
 
-                try  {
+                try {
                     cmp.set('v.expenditures', exps);
                 } catch (error) {
                     console.log('error setting expenditures:', error);
