@@ -48,7 +48,7 @@
             </componentInstanceProperties>
             <componentInstanceProperties>
                 <name>relatedListApiName</name>
-                <value>GAU_Expendatures__r</value>
+                <value>GAU_Expenditures__r</value>
             </componentInstanceProperties>
             <componentInstanceProperties>
                 <name>relatedListComponentOverride</name>
@@ -93,7 +93,7 @@
             </componentInstanceProperties>
             <componentInstanceProperties>
                 <name>title</name>
-                <value>GAU Expendatures</value>
+                <value>GAU Expenditures</value>
             </componentInstanceProperties>
             <componentName>flexipage:tab</componentName>
         </componentInstances>
