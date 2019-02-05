@@ -6,9 +6,9 @@
         <name>CompactLayout</name>
     </types>
     <types>
-        <members>GAU_Expendature__c.Amount__c</members>
-        <members>GAU_Expendature__c.Disbursement__c</members>
-        <members>GAU_Expendature__c.General_Accounting_Unit__c</members>
+        <members>GAU_Expenditure__c.Amount__c</members>
+        <members>GAU_Expenditure__c.Disbursement__c</members>
+        <members>GAU_Expenditure__c.General_Accounting_Unit__c</members>
         <members>npsp__General_Accounting_Unit__c.Amount_Available__c</members>
         <members>npsp__General_Accounting_Unit__c.First_Disbursement_Date__c</members>
         <members>npsp__General_Accounting_Unit__c.Largest_Disbursement__c</members>
@@ -29,9 +29,9 @@
         <name>FlexiPage</name>
     </types>
     <types>
-        <members>GAU_Expendature__c-GAU Expendature Layout</members>
+        <members>GAU_Expenditure__c-GAU Expenditure Layout</members>
         <members>npsp__General_Accounting_Unit__c-GAU w%2FDisbursement Layout</members>
-        <members>outfunds__Disbursement__c-Disbursement w%2FExpendatures Layout</members>
+        <members>outfunds__Disbursement__c-Disbursement w%2FExpenditures Layout</members>
         <name>Layout</name>
     </types>
     <version>42.0</version>
